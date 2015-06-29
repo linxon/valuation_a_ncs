@@ -1,9 +1,7 @@
 <?php   //  init.inc.php - Инициализация
 
 header('Content-type: text/html; charset=utf-8');   //  Устанавливаем кодировку по умолчанию
-
 define('CONF_FILE_NAME', 'config.inc.php');         // Задаем конфигурационный файл
-define('VERSION', '0.1.26_dev');                    //  Версия движка
 
 //  Проверяем версию PHP (Допустимо по умолчанию - 5.3.0)
 if(version_compare(phpversion(), '5.3.0', '<') == TRUE) die("Приложение требует PHP выше 5.3.0 версии");
@@ -22,7 +20,7 @@ if(FALSE == file_exists(CONF_FILE_NAME) && is_readable(CONF_FILE_NAME) == FALSE)
         /*
          * Вывод системных синтаксических ошибок
           ----------------------------------------- */
-        if($config['debug'] == TRUE) {
+        if(DEBUG == TRUE) {
 
                 @ini_set('display_errors', TRUE);
                 @ini_set('display_startup_errors', TRUE);
