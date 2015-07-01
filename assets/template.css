@@ -63,6 +63,12 @@ body, html {
     margin-bottom: 15px;
 }
 
+.bor-title {
+    padding: 5px; 
+    background: #F5F5F5;
+    margin-bottom: 5px;
+}
+
 
 /*  Content box
 -------------------------*/
@@ -151,6 +157,37 @@ body, html {
 }
 .com-last-time {
     color: #777;
+}
+#com-enter-reply-form {
+    display: none;
+}
+#com-enter-reply-form textArea {
+    box-shadow: 0 0 3px rgba(65, 34, 236, 0.2) inset;
+        -moz-box-shadow: 0 0 3px rgba(65, 34, 236, 0.2) inset;
+            -webkit-box-shadow: 0 0 3px rgba(65, 34, 236, 0.2) inset;
+    width: 600px;
+    height: 80px;
+    font-size: 12px;
+    border: 1px solid #cfcfcf;
+    padding: 5px;
+}
+.com-reply-post {
+    cursor: pointer;
+}
+
+.com-enter-post-form-btns {
+    padding: 10px;
+}
+
+#com-enter-post-form textArea {
+    box-shadow: 0 0 3px rgba(65, 34, 236, 0.2) inset;
+        -moz-box-shadow: 0 0 3px rgba(65, 34, 236, 0.2) inset;
+            -webkit-box-shadow: 0 0 3px rgba(65, 34, 236, 0.2) inset;
+    width: 600px;
+    height: 80px;
+    font-size: 12px;
+    border: 1px solid #cfcfcf;
+    padding: 5px;
 }
 
 .comment-text {

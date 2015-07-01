@@ -3,7 +3,6 @@
 header('Content-type: text/html; charset=utf-8');   //  Устанавливаем кодировку по умолчанию
 
 define('CONF_FILE_NAME', 'config.inc.php');         // Задаем конфигурационный файл
-
 //  Необходимое
 define('DEBUG', TRUE);                  //  Режим разработчика
 define('TIMEZONE', 'Europe/Moscow');
@@ -13,6 +12,12 @@ define('EXT', '.php', true);
 define('INC_FILE_PREFIX', '.inc');
 define('CLASS_FILE_PREFIX', 'class.');
 define('SESS_ID_NAME', 'sessid');
+define('AJAX_EX_DIR', 'sys/ajax_exec/');
+
+//  Необходимые флажки для функций
+define('IS_POST', 2);
+define('IS_GET', 1);
+
 
 define('INC_ROOT', dirname(__DIR__));
 define('HTTP_ROOT', 'http://'.$_SERVER['HTTP_HOST'].DS.str_replace($_SERVER['DOCUMENT_ROOT'], NULL, str_replace('\\', '/', INC_ROOT)));
@@ -25,55 +30,53 @@ if(isset($_SERVER['HTTP_HOST']) == FALSE) die('Приложение будет �
 /*
  * Запускаем инициализацию приложения
   ------------------------------------ */
-if(FALSE == file_exists(CONF_FILE_NAME) && is_readable(CONF_FILE_NAME) == FALSE) {
 
-        /*
-         * Подключаем файл конфигурации
-          --------------------------------- */
-        $config = require(CONF_FILE_NAME);
 
-        /*
-         * Вывод системных синтаксических ошибок
-          ----------------------------------------- */
-        if(DEBUG == TRUE) {
+/*
+ * Подключаем файл конфигурации
+  --------------------------------- */
+$config = require(CONF_FILE_NAME);
 
-                @ini_set('display_errors', TRUE);
-                @ini_set('display_startup_errors', TRUE);
+/*
+ * Вывод системных синтаксических ошибок
+  ----------------------------------------- */
+if(DEBUG == TRUE) {
 
-                error_reporting(E_ALL);
-        } else error_reporting(0);
+    @ini_set('display_errors', TRUE);
+    @ini_set('display_startup_errors', TRUE);
 
-        @date_default_timezone_set(TIMEZONE);
-        @mb_internal_encoding(ENCTYPE);
-        //setlocale(LC_ALL, 'en_US');
+    error_reporting(E_ALL);
+} else error_reporting(0);
 
-        /*
-         * Подключаем необходимые функции...
-          ------------------------------------- */
-        require_once('functions.inc.php');
+@date_default_timezone_set(TIMEZONE);
+@mb_internal_encoding(ENCTYPE);
+//setlocale(LC_ALL, 'en_US');
 
-        /**
-         * Автозагрузка всех необходимых классов (PSR-0)
-         * http://www.php-fig.org/psr/psr-0/
-         * 
-         * @param type $class_name
-         */
-        spl_autoload_register(function($className) {
+/*
+ * Подключаем необходимые функции...
+  ------------------------------------- */
+require_once('functions.inc.php');
 
-                $className = ltrim($className, '\\');
+/**
+ * Автозагрузка всех необходимых классов (PSR-0)
+ * http://www.php-fig.org/psr/psr-0/
+ * 
+ * @param type $class_name
+ */
+spl_autoload_register(function($className) {
 
-                $fileName = '';
-                $namespace = '';
+    $className = ltrim($className, '\\');
 
-                if($lastNsPos = strrpos($className, '\\')) {
-                        $namespace = substr($className, 0, $lastNsPos);
-                        $className = substr($className, $lastNsPos + 1);
-                        $fileName = strtolower(str_replace('\\', DS, $namespace).DS);
-                }
+    $fileName = '';
+    $namespace = '';
 
-                $fileName .= CLASS_FILE_PREFIX.str_replace('_', DS, $className).INC_FILE_PREFIX.EXT;
-                if(file_exists($fileName) && is_readable($fileName)) require($fileName);
-                
-        });
-        
-} else die('Не найден конфигурационный файл!'); //  Завершаем скрипт в случае ошибки...
+    if($lastNsPos = strrpos($className, '\\')) {
+        $namespace = substr($className, 0, $lastNsPos);
+        $className = substr($className, $lastNsPos + 1);
+        $fileName = strtolower(str_replace('\\', DS, $namespace).DS);
+    }
+
+    $fileName .= CLASS_FILE_PREFIX.str_replace('_', DS, $className).INC_FILE_PREFIX.EXT;
+    if(file_exists($fileName) && is_readable($fileName)) require($fileName);
+});
+

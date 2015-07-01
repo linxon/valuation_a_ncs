@@ -23,12 +23,27 @@
         <div class="cleaner"></div>
     </div>
     <div class="separator"></div>
-    <div style="padding: 5px; background: #F5F5F5;margin-bottom: 5px;"><h4>Comments:</h4></div>  
+
+    <div class="bor-title"><h4>Add comment:</h4></div>  
+
+    <div id="com-enter-post-form">
+        <form action="" method="POST">
+            <textarea placeholder="Enter post..." id="com-enter-post-form-message" name="post_comment"></textarea>
+            <div class="com-enter-post-form-btns"><input id="com-enter-post-form-btn1" value="Send" type="submit" name="enter-post"/></div>
+        </form>
+    </div>
+    <div class="bor-title"><h4>Comments:</h4></div>  
     <!-- END/Content -->
 
+
+    <?php
     
+    $post = new Sys\Wigets\Comment(array());
+
+    var_dump($post);
     
-    
+    ?>
+
     <!-- Comment box -->
     <div class="comment-box">
         <div class="comment-title">
@@ -46,19 +61,25 @@
                 <span>Adv</span>
                 <span>Adv</span>
                 <span>Adv</span>
-                <span><b><a href="#">Reply</a></b></span>
+                <span><b><a id="com-reply-post" href="#">Reply</a></b></span>
                 <span>hide child comments</span>
             </div>
             <div class="com-reply-box">
-
+                <div id="com-enter-reply-form">
+                    <form action="" method="POST">
+                        <textarea placeholder="Enter post..." id="com-enetr-reply-message" name="post_comment"></textarea>
+                        <div class="com-enter-post-form-btns">
+                            <input id="btn-enter-post" type="submit" value="Send" name="enter-post"/>
+                            <input type="button" name="cancel" value="Cancel">
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
     <!-- END/Comment box -->
 
     <div class="com-separator"></div>
-    
-
 
     <!-- Footer -->
     <div id="footer">

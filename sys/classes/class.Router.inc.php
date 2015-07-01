@@ -38,15 +38,13 @@ class Router {
      * @var type 
      */
     private $_views_dir;
-    
-    
     private $_params;
 
     public function __construct($params = array()) {
         isset($params['handler']) ? $this->_handler = $params['handler'] : $this->_handler = NULL;
         isset($params['error_page']) ? $this->_error_page = $params['error_page'] : $this->_error_page = NULL;
         isset($params['views_dir']) ? $this->_views_dir = $params['views_dir'] : $this->_views_dir = NULL;
-        
+
         isset($params['params']) ? $this->_params = $params['params'] : $this->_params = NULL;
     }
 
@@ -66,7 +64,9 @@ class Router {
         else {
             if($this->checkView($viewer) == TRUE) {
                 $this->_uri[] = $uri;
-                $this->_view[] = $viewer;
+                if(is_null($viewer) != TRUE) {
+                    $this->_view[] = $viewer;
+                } else $this->_view[] = FALSE;
             }
         }
     }
@@ -90,17 +90,19 @@ class Router {
 
         $path = NULL;
         foreach($this->_uri as $key => $value) {
+
             if($value == '/'.$url[0]) {
                 $path = array(
-                    'view' => $this->_view[$key]
+                    'view' => $this->_view[$key],
+                    'exec' => $url[0]
                 );
                 break;
             }
         }
 
         switch($path) {
-            case is_array($path) :
-                
+            case!empty($path['view']):
+
                 $tpl = new tpl(array(
                     'theme' => $this->_params['theme']
                 ));
@@ -108,8 +110,14 @@ class Router {
                 $view_file = $this->_views_dir.$path['view'].EXT;
 
                 if(file_exists($view_file) and is_readable($view_file)) $tpl->render($view_file);
-                else $tpl->render($this->_error_page);
+                else $this->show_error(404);
 
+                break;
+
+            case empty($path['view']) :
+                $filename = $this->_params['exec_dir'].$url[0].EXT;
+                if(file_exists($filename) and is_readable($filename)) require($filename);
+                else die('Ошибка во время обработки запроса');
                 break;
             default :
                 $this->show_error(404);

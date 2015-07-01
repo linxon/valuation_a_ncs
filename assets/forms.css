@@ -1,0 +1,38 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jul 1, 2015, 1:17:03 PM
+    Author     : Yury Martynov <linxon>
+*/
+
+input[type=submit], input[type=button] {
+    background: #FFF;
+    border: 1px solid #cfcfcf;
+    color: #666;
+    padding: 3px 15px 3px 15px;
+    cursor: default;
+    margin-right: 10px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+        -moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+            -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+    
+}
+input[type=submit]:hover , input[type=button]:hover {
+    box-shadow: 0 0 2px rgba(225, 225, 225, 0.9) inset;
+        -moz-box-shadow: 0 0 2px rgba(225, 225, 225, 0.9) inset;
+            -webkit-box-shadow: 0 0 2px rgba(225, 225, 225, 0.9) inset;
+    background: #ADDEFF;
+    color: #111;
+    border: 1px solid #0098FF;
+}
+input[type=submit]:active, input[type=button]:active {
+    box-shadow: 0 0 2px rgba(225, 225, 225, 0.9) inset;
+        -moz-box-shadow: 0 0 2px rgba(225, 225, 225, 0.9) inset;
+            -webkit-box-shadow: 0 0 2px rgba(225, 225, 225, 0.9) inset;
+    background: #0098FF;
+    border: 1px solid #0000FF;
+    color: #FFF;
+}

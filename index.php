@@ -1,5 +1,6 @@
 <?php
 
+//  Подключаем файл инициализации приложения
 require('sys/init.inc.php');
 
 use Sys\Classes\Router as R;
@@ -28,19 +29,11 @@ $boot->add('/index', 'index');
 $boot->add('/blog', 'blog');
 $boot->add('/auth', 'auth');
 
+//  Пункты, которые выполняются как обычной скрипт без инициализации
+$boot->add('/ajax', FALSE);
+
 //var_dump($GLOBALS);
 //var_dump($boot);
-
-
-$pdo = new \PDO('pgsql:host=localhost;port=5432;dbname=comment_sys;user=postgres;password=postgres');
-
-$res = $pdo->query("SELECT * FROM users");
-
-while($row = $res->fetch(PDO::FETCH_NAMED)) {
-    echo $row['username'];
-}
-
-$pdo = $res = NULL;
 
 //  Запускаем маршрутизацию
 $boot->submit();

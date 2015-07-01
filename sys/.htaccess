@@ -1,0 +1,12 @@
+# Apache configuration file (see httpd.apache.org/docs/2.2/mod/quickreference.html)
+
+# disable directory listing
+Options -Indexes -MultiViews +FollowSymLinks
+AddDefaultCharset utf-8
+
+<IfModule mod_rewrite.c>
+
+    RewriteEngine Off
+    RewriteBase /Develop/EvaluationA_NCS/
+
+</IfModule>

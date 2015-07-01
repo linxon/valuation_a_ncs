@@ -8,3 +8,40 @@ and open the template in the editor.
     Author     : Yury Martynov <linxon>
 */
 
+$(document).ready(function() {
+
+    $('.com-tree-control-btl').click(function() {
+        $('.toggle').toggle(0);
+    });
+
+    $('#com-reply-post').click(function(name) {
+        name.preventDefault();
+        $('#com-enter-reply-form').slideDown(250);
+    });
+
+    $('#btn-enter-post').click(function(none) {
+        
+        none.preventDefault();
+        
+        var $postMsg = $('#com-enetr-reply-message').val();
+        
+        $.ajax({
+            type: 'POST',
+            url: 'xajax.php',
+            cache: false,
+            data: {
+                'request': 'add_comment',
+                'send_post_msg': $postMsg
+            },
+            success: function(data, textStatus, jqXHR) {
+                $('.comment-options').append(data);
+                $('#com-enter-reply-form').hide(0);
+                $('#com-enetr-reply-message').val('');
+            },
+            error: function() {
+                console.log('Error');
+            }
+        });
+    });
+
+});

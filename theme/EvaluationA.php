@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>Evaluation Assignment – Nested comment system</title>
         <link href="assets/template.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/forms.css" rel="stylesheet" type="text/css"/>
         <script src="assets/jquery.min.js" type="text/javascript"></script>
         <script src="assets/main.js" type="text/javascript"></script>
         <script src="assets/comment.js" type="text/javascript"></script>
