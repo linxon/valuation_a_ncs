@@ -10,11 +10,12 @@ AddDefaultCharset utf-8
     RewriteBase /Develop/EvaluationA_NCS/
 
     RewriteCond %{ENV:REDIRECT_STATUS} ^$
-    RewriteCond %{REQUEST_URI} !\.(js|css|gif|png|jpg|jpeg|ico)$
-    RewriteCond %{REQUEST_FILENAME} !-l
-    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_URI} !\.(js|css|gif|png|jpg|jpeg|ico|php)$
+    RewriteCond %{REQUEST_FILENAME} !-l [OR]
+    RewriteCond %{REQUEST_FILENAME} -s [OR]
+    RewriteCond %{REQUEST_FILENAME} !-f [OR]
     RewriteCond %{REQUEST_FILENAME} !-d
 
-    RewriteRule ^(.*)$ index.php?route=$1 [L,QSA]
+    RewriteRule ^(.*)\?*$ index.php?route=$1 [L,QSA]
 
 </IfModule>
