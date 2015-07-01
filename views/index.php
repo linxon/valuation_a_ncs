@@ -26,6 +26,9 @@
     <div style="padding: 5px; background: #F5F5F5;margin-bottom: 5px;"><h4>Comments:</h4></div>  
     <!-- END/Content -->
 
+    
+    
+    
     <!-- Comment box -->
     <div class="comment-box">
         <div class="comment-title">
@@ -54,6 +57,7 @@
     <!-- END/Comment box -->
 
     <div class="com-separator"></div>
+    
 
 
     <!-- Footer -->

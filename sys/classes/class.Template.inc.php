@@ -73,6 +73,7 @@ class Template {
 
     public function render($view_file) {
         $theme = './theme/'.$this->_theme.EXT;
+        
         if(file_exists($theme) and is_readable($theme)) require($theme);
         else die('Ошибка во время обработки запроса');
     }

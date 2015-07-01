@@ -38,11 +38,16 @@ class Router {
      * @var type 
      */
     private $_views_dir;
+    
+    
+    private $_params;
 
     public function __construct($params = array()) {
         isset($params['handler']) ? $this->_handler = $params['handler'] : $this->_handler = NULL;
         isset($params['error_page']) ? $this->_error_page = $params['error_page'] : $this->_error_page = NULL;
         isset($params['views_dir']) ? $this->_views_dir = $params['views_dir'] : $this->_views_dir = NULL;
+        
+        isset($params['params']) ? $this->_params = $params['params'] : $this->_params = NULL;
     }
 
     private function checkView($name) {
@@ -95,12 +100,9 @@ class Router {
 
         switch($path) {
             case is_array($path) :
-
+                
                 $tpl = new tpl(array(
-                    'theme' => THEME,
-                    'params' => array(
-                        
-                    )
+                    'theme' => $this->_params['theme']
                 ));
 
                 $view_file = $this->_views_dir.$path['view'].EXT;

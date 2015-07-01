@@ -1,0 +1,20 @@
+# Apache configuration file (see httpd.apache.org/docs/2.2/mod/quickreference.html)
+
+# disable directory listing
+Options -Indexes -MultiViews +FollowSymLinks
+AddDefaultCharset utf-8
+
+<IfModule mod_rewrite.c>
+
+    RewriteEngine On
+    RewriteBase /Develop/EvaluationA_NCS/
+
+    RewriteCond %{ENV:REDIRECT_STATUS} ^$
+    RewriteCond %{REQUEST_URI} !\.(js|css|gif|png|jpg|jpeg|ico)$
+    RewriteCond %{REQUEST_FILENAME} !-l
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    RewriteRule ^(.*)$ index.php?route=$1 [L,QSA]
+
+</IfModule>

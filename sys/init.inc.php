@@ -1,7 +1,22 @@
 <?php   //  init.inc.php - Инициализация
 
 header('Content-type: text/html; charset=utf-8');   //  Устанавливаем кодировку по умолчанию
+
 define('CONF_FILE_NAME', 'config.inc.php');         // Задаем конфигурационный файл
+
+//  Необходимое
+define('DEBUG', TRUE);                  //  Режим разработчика
+define('TIMEZONE', 'Europe/Moscow');
+define('ENCTYPE', 'UTF-8');
+define('DS', DIRECTORY_SEPARATOR, true);
+define('EXT', '.php', true);
+define('INC_FILE_PREFIX', '.inc');
+define('CLASS_FILE_PREFIX', 'class.');
+define('SESS_ID_NAME', 'sessid');
+
+define('INC_ROOT', dirname(__DIR__));
+define('HTTP_ROOT', 'http://'.$_SERVER['HTTP_HOST'].DS.str_replace($_SERVER['DOCUMENT_ROOT'], NULL, str_replace('\\', '/', INC_ROOT)));
+define('ASSET_ROOT', 'http://'.$_SERVER['HTTP_HOST'].DS.str_replace($_SERVER['DOCUMENT_ROOT'], NULL, str_replace('\\', '/', INC_ROOT)));
 
 //  Проверяем версию PHP (Допустимо по умолчанию - 5.3.0)
 if(version_compare(phpversion(), '5.3.0', '<') == TRUE) die("Приложение требует PHP выше 5.3.0 версии");

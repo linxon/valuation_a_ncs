@@ -9,6 +9,8 @@ use Sys\Classes\Router as R;
   ------------------------------------------ */
 $boot = new R(array(
     
+    'params' => $config,
+    
     //  Обязательные параметры
     'handler' => 'route', // Устанавливаем ключ который будет принимать GET параметры в URL строке
     'error_page' => 'error', //  Страница ошибки 404 Not Found
@@ -28,6 +30,17 @@ $boot->add('/auth', 'auth');
 
 //var_dump($GLOBALS);
 //var_dump($boot);
+
+
+$pdo = new \PDO('pgsql:host=localhost;port=5432;dbname=comment_sys;user=postgres;password=postgres');
+
+$res = $pdo->query("SELECT * FROM users");
+
+while($row = $res->fetch(PDO::FETCH_NAMED)) {
+    echo $row['username'];
+}
+
+$pdo = $res = NULL;
 
 //  Запускаем маршрутизацию
 $boot->submit();
