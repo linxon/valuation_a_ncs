@@ -5,7 +5,7 @@
             <li><a href="forum">Forum</a></li>
             <li><a href="blog">Blog</a></li>
             <li><a href="about">About</a></li>
-            <li class="rigth"><a href="#">Auth</a>|<a href="#">Register</a></li>
+            <li class="rigth"><a href="auth?_me">Auth</a>|<a href="auth?_new_user">Register</a></li>
         </ul>
         <div class="cleaner"></div>
     </div>
@@ -37,11 +37,9 @@
 
 
     <?php
-    
     $post = new Sys\Wigets\Comment(array());
 
-    var_dump($post);
-    
+    $post->showComments();
     ?>
 
     <!-- Comment box -->

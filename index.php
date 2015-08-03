@@ -10,7 +10,7 @@ use Sys\Classes\Router as R;
   ------------------------------------------ */
 $boot = new R(array(
     
-    'params' => $config,
+    //'params' => $config,
     
     //  Обязательные параметры
     'handler' => 'route', // Устанавливаем ключ который будет принимать GET параметры в URL строке

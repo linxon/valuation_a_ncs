@@ -104,7 +104,7 @@ class Router {
             case!empty($path['view']):
 
                 $tpl = new tpl(array(
-                    'theme' => $this->_params['theme']
+                    'theme' => THEME
                 ));
 
                 $view_file = $this->_views_dir.$path['view'].EXT;

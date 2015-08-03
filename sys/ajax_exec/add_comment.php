@@ -3,7 +3,7 @@
 $post = new Sys\Wigets\Comment(array(
     
     //  Устанавливае параметры соединения с БД для PDO
-    'pdo_dsn' => 'pgsql:host=localhost;port=5432;dbname=comment_sys;user=postgres;password=postgres'
+    'pdo_dsn' => 'mysql:host=localhost;dbname=comment_sys;user=postgres;password=postgres'
     
 ));
 

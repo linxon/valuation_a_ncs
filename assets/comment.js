@@ -16,7 +16,7 @@ $(document).ready(function() {
 
     $('#com-reply-post').click(function(name) {
         name.preventDefault();
-        $('#com-enter-reply-form').slideDown(250);
+        $('#com-enter-reply-form').slideDown(0);
     });
 
     $('#btn-enter-post').click(function(none) {

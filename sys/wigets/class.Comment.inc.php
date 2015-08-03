@@ -2,47 +2,11 @@
 
 namespace Sys\Wigets;
 
-class Comment {
+use Sys\Classes\DataBase;
 
-    /**
-     * Результат подключения к БД
-     * @var type 
-     */
-    private $_db = NULL;
-    
-    /**
-     * Флажок статуса подключения к БД
-     * @var type 
-     */
-    public $is_active = FALSE;
-    
-    /**
-     * Параметры соединения с БД для PDO
-     * @var type 
-     */
-    private $_dsn;
+class Comment extends DataBase {
     
     public $max_post;
-
-    public function __construct(array $params) {
-        if(!empty($params)) {
-            isset($params['pdo_dsn']) ? $this->_dsn = $params['pdo_dsn'] : $this->_dsn = NULL;
-        }
-    }
-
-    /**
-     * Инициализация БД
-     */
-    private function dbInit() {
-        if($this->is_active == FALSE) {
-            try {
-                $this->_db = new \PDO($this->_dsn);
-                $this->is_active = TRUE;
-            } catch (PDOException $ex) {
-                echo $ex->getMessage();
-            }
-        }
-    }
     
     public function getCommentTree() {
         
@@ -53,7 +17,17 @@ class Comment {
     }
     
     public function addComment($msg) {
+        if($this->is_active == FALSE) $this->dbInit();
         
+        $res = $this->_db->prepare("INSERT INTO comments(message) VALUES(:message)");
+        $res->execute(array(':message' => $msg));
+        
+        $this->dbFree();
+    }
+    
+    public function showComments() {
+        if($this->is_active == FALSE) $this->dbInit();
+        $res = $this->_db->exec("INSERT INTO users(username) VALUES('asdasdasd')");
     }
     
     /**
@@ -61,7 +35,7 @@ class Comment {
      * @param type $obj
      * @return type
      */
-    private function dbFree($obj) {
+    private function dbFree() {
         return $this->_db = NULL;
     }
 

@@ -3,25 +3,6 @@
 header('Content-type: text/html; charset=utf-8');   //  Устанавливаем кодировку по умолчанию
 
 define('CONF_FILE_NAME', 'config.inc.php');         // Задаем конфигурационный файл
-//  Необходимое
-define('DEBUG', TRUE);                  //  Режим разработчика
-define('TIMEZONE', 'Europe/Moscow');
-define('ENCTYPE', 'UTF-8');
-define('DS', DIRECTORY_SEPARATOR, true);
-define('EXT', '.php', true);
-define('INC_FILE_PREFIX', '.inc');
-define('CLASS_FILE_PREFIX', 'class.');
-define('SESS_ID_NAME', 'sessid');
-define('AJAX_EX_DIR', 'sys/ajax_exec/');
-
-//  Необходимые флажки для функций
-define('IS_POST', 2);
-define('IS_GET', 1);
-
-
-define('INC_ROOT', dirname(__DIR__));
-define('HTTP_ROOT', 'http://'.$_SERVER['HTTP_HOST'].DS.str_replace($_SERVER['DOCUMENT_ROOT'], NULL, str_replace('\\', '/', INC_ROOT)));
-define('ASSET_ROOT', 'http://'.$_SERVER['HTTP_HOST'].DS.str_replace($_SERVER['DOCUMENT_ROOT'], NULL, str_replace('\\', '/', INC_ROOT)));
 
 //  Проверяем версию PHP (Допустимо по умолчанию - 5.3.0)
 if(version_compare(phpversion(), '5.3.0', '<') == TRUE) die("Приложение требует PHP выше 5.3.0 версии");
@@ -35,7 +16,7 @@ if(isset($_SERVER['HTTP_HOST']) == FALSE) die('Приложение будет �
 /*
  * Подключаем файл конфигурации
   --------------------------------- */
-$config = require(CONF_FILE_NAME);
+require(CONF_FILE_NAME);
 
 /*
  * Вывод системных синтаксических ошибок
@@ -78,5 +59,14 @@ spl_autoload_register(function($className) {
 
     $fileName .= CLASS_FILE_PREFIX.str_replace('_', DS, $className).INC_FILE_PREFIX.EXT;
     if(file_exists($fileName) && is_readable($fileName)) require($fileName);
+    
 });
 
+
+
+$auth = new Sys\Classes\AuthBase();
+var_dump($auth->reg_user(array(
+    'login' => 'username',
+    'passwd' => 'username',
+    'email' => 'email@linxon.ru'
+)));
